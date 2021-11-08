@@ -17,10 +17,14 @@ use Drupal\node\NodeInterface;
  * @param $form_id
  */
 function bitcoinoperation_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  if ($form_id === 'node_bitcoin_operation_form') {
+  if ($form_id === 'node_bitcoin_operation_form' || $form_id === 'node_bitcoin_operation_edit_form') {
     $form['title']['widget'][0]['value']['#value'] = t('should change after');
     $form['title']['widget'][0]['value']['#required'] = false;
     $form['title']['#type'] = 'hidden';
+  }
+
+  if ($form_id === 'node_bitcoin_operation_edit_form') {
+    $form['field_price']['#disabled'] = true;
   }
 }
 
