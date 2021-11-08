@@ -24,3 +24,15 @@ function bitcoinoperation_form_alter(&$form, FormStateInterface $form_state, $fo
   }
 }
 
+
+/**
+ *
+ * Implements hook to change title before save the node
+ *
+ * @param \Drupal\node\NodeInterface $node
+ */
+function bitcoinoperation_node_presave(NodeInterface $node) {
+  $price = $node->get('field_price')->value;
+  $number = $node->get('field_number')->value;
+  $node->setTitle($number . ' x (' . $price . ')');
+}
