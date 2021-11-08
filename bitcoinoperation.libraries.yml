@@ -1,0 +1,8 @@
+bitcoinoperation:
+  version: 1.x
+  js:
+    js/bitcoinoperation.library.js: {}
+  dependencies:
+    - core/jquery
+    - core/once
+

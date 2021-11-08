@@ -17,17 +17,27 @@ use Drupal\node\NodeInterface;
  * @param $form_id
  */
 function bitcoinoperation_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  print_r($form_id);
+
+  /* title field */
   if ($form_id === 'node_bitcoin_operation_form' || $form_id === 'node_bitcoin_operation_edit_form') {
     $form['title']['widget'][0]['value']['#value'] = t('should change after');
     $form['title']['widget'][0]['value']['#required'] = false;
     $form['title']['#type'] = 'hidden';
   }
 
+  /* price field when create node */
+  if ($form_id === 'node_bitcoin_operation_form') {
+    $form['#attached']['library'][] = 'bitcoinoperation/bitcoinoperation';
+  }
+
+  /* price field when edit node */
   if ($form_id === 'node_bitcoin_operation_edit_form') {
     $form['field_price']['#disabled'] = true;
   }
-}
 
+}
 
 /**
  *
@@ -40,3 +50,4 @@ function bitcoinoperation_node_presave(NodeInterface $node) {
   $number = $node->get('field_number')->value;
   $node->setTitle($number . ' x (' . $price . ')');
 }
+
