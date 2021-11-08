@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Bitcoin Operation module hooks
+ */
+
+use Drupal\core\Form\FormStateInterface;
+use Drupal\node\NodeInterface;
+
+/**
+ *
+ * Implements hook to make node title hidden and not required
+ *
+ * @param $form
+ * @param \Drupal\core\Form\FormStateInterface $form_state
+ * @param $form_id
+ */
+function bitcoinoperation_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form_id === 'node_bitcoin_operation_form') {
+    $form['title']['widget'][0]['value']['#value'] = t('should change after');
+    $form['title']['widget'][0]['value']['#required'] = false;
+    $form['title']['#type'] = 'hidden';
+  }
+}
+
