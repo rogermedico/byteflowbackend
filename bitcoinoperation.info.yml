@@ -1,0 +1,6 @@
+name: Bitcoin Operation
+description: Allows users set up a Bitcoin operation.
+package: Bitcoin Operation
+type: module
+version: 1.0
+core_version_requirement: ^9
