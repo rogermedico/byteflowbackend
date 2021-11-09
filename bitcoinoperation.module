@@ -7,10 +7,11 @@
 
 use Drupal\core\Form\FormStateInterface;
 use Drupal\node\NodeInterface;
+use \Drupal\node\Entity\Node;
 
 /**
  *
- * Implements hook to make node title hidden and not required
+ * Implements hook_form_alter() to make node title hidden and not required
  *
  * @param $form
  * @param \Drupal\core\Form\FormStateInterface $form_state
@@ -39,7 +40,7 @@ function bitcoinoperation_form_alter(&$form, FormStateInterface $form_state, $fo
 
 /**
  *
- * Implements hook to change title before save the node
+ * Implements hook_node_presave() to change title before save the node
  *
  * @param \Drupal\node\NodeInterface $node
  */
@@ -48,6 +49,20 @@ function bitcoinoperation_node_presave(NodeInterface $node) {
     $price = $node->get('price')->value;
     $number = $node->get('number')->value;
     $node->setTitle($number . ' x (' . $price . ')');
+  }
+}
+
+/**
+ * Implements hook_uninstall() to remove all nodes created under
+ * bitcoin_operation content type.
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function bitcoinoperation_uninstall() {
+  $query = \Drupal::entityQuery('node')->condition('type', 'bitcoin_operation');
+  $nids = $query->execute();
+  foreach ($nids as $nid) {
+    Node::load($nid)->delete();
   }
 }
 
