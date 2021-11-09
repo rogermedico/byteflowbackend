@@ -1,0 +1,23 @@
+# field.field.node.bitcoinoperation.price.yml
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.price
+    - node.type.bitcoinoperation
+id: node.bitcoinoperation.price
+field_name: price
+entity_type: node
+bundle: bitcoin_operation
+label: 'Price'
+description: 'The price that will pay in the operation for each bitcoin.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: !!float 40000
+  max: !!float 60000
+  prefix: ''
+  suffix: ''
+field_type: float

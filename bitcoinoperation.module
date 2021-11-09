@@ -18,8 +18,6 @@ use Drupal\node\NodeInterface;
  */
 function bitcoinoperation_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
-  print_r($form_id);
-
   /* title field */
   if ($form_id === 'node_bitcoin_operation_form' || $form_id === 'node_bitcoin_operation_edit_form') {
     $form['title']['widget'][0]['value']['#value'] = t('should change after');

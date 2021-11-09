@@ -1,0 +1,14 @@
+# node.type.car_brand.yml
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - bitcoinoperation
+name: 'Bitcoin Operation'
+type: bitcoin_operation
+description: 'Content type that can be used to perform a <em>Bitcoin operation</em>.'
+help: ''
+new_revision: false
+preview_mode: 0
+display_submitted: true
