@@ -10,7 +10,7 @@ Module to perform bitcoin operations as shown in demo video.
 
 ## Content type creation
 
-The installation of the module also creates the content type so you don't have to create nothing, just install and enjoy.
+The installation of the module also creates the content type, so you have to create nothing, just install and enjoy.
 
 ## Uninstall
 
