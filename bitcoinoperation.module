@@ -32,7 +32,7 @@ function bitcoinoperation_form_alter(&$form, FormStateInterface $form_state, $fo
 
   /* price field when edit node */
   if ($form_id === 'node_bitcoin_operation_edit_form') {
-    $form['field_price']['#disabled'] = true;
+    $form['price']['#disabled'] = true;
   }
 
 }
@@ -44,8 +44,10 @@ function bitcoinoperation_form_alter(&$form, FormStateInterface $form_state, $fo
  * @param \Drupal\node\NodeInterface $node
  */
 function bitcoinoperation_node_presave(NodeInterface $node) {
-  $price = $node->get('field_price')->value;
-  $number = $node->get('field_number')->value;
-  $node->setTitle($number . ' x (' . $price . ')');
+  if($node->getType() === 'bitcoin_operation') {
+    $price = $node->get('price')->value;
+    $number = $node->get('number')->value;
+    $node->setTitle($number . ' x (' . $price . ')');
+  }
 }
 

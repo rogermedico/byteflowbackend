@@ -3,33 +3,22 @@
     attach: function (context, settings) {
       once('edit-price-0-value','input#edit-price-0-value', context).forEach(function(){
 
-        function fakeGetBitcoinPrice() {
-          const max = 60000;
-          const min = 40000;
-          return Math.floor(Math.random() * (max - min)) + min;
-        }
+        async function getBitcoinPrice() {
+          const endpoint1 = 'https://www.random.org/integers/?num=1&min=40000&max=60000&col=1&base=10&format=plain';
 
-        function getBitcoinPrice() {
-
-          const headers = new Headers();
-          headers.append('Access-Control-Allow-Origin','*');
-          headers.append('Access-Control-Allow-Methods','GET');
-
-          return fetch('http://www.randomnumberapi.com/api/v1.0/random?min=40000&max=60000', {
+          return  await fetch(endpoint1, {
             method: 'get',
-            // mode: 'no-cors',
-            headers: headers,
-          }).then(response => {
-            console.log(response);
-            return response[0];
           })
+          .then(response => response.text())
+          .then(response => {
+            return parseInt(response);
+          });
         }
 
         const el = document.getElementById('edit-price-0-value');
 
-        setInterval(function () {
-          el.value = fakeGetBitcoinPrice();
-          //el.value = getBitcoinPrice();
+        setInterval(async function () {
+          el.value = await getBitcoinPrice();
         }, 1000);
 
       });
